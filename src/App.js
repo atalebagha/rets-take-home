@@ -1,39 +1,52 @@
 /**
  * Remove this content and start here
  */
+ import {
+  Switch,
+  Route,
+  useLocation
+} from "react-router-dom";
+import { Flex, Box } from 'reflexbox';
 
-import heartFill from './assets/heart-fill.svg';
-import heartStroke from './assets/heart-stroke.svg';
+import PropertyListings from './containers/PropertyListings';
 
 function App() {
+	const location = useLocation();
+
+	let title;
+
+	switch (location.pathname) {
+		case '/property-listings':
+			title = 'Property Listings'
+			break;
+		default:
+			break;
+	}
+
   return (
-    <div
-      style={{
-        maxWidth: '70%',
-        padding: '1em',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        background: '#eee',
-      }}
+    <Box
+			w={1}
+			h={1}
+			justifyContent={'center'}
+			justifyItems='center'
     >
-      <h1>Side React Take-home Assignment</h1>
-      <p>
-        Welcome to the Side React take-home assignment. This boilerplate is
-        intended to help get you started. It's already setup with the fonts and
-        SVG assets you will need to complete your assignment.
-      </p>
-      <p>
-        <em>
-          Be sure to read through the INSTRUCTIONS.md content before beginning.
-          Good luck!
-        </em>
-      </p>
-      <div>
-        <div>Here are the SVG assets you will need.</div>
-        <img src={heartFill} className="App-logo" alt="favorite icon" />
-        <img src={heartStroke} className="App-logo" alt="unfavorite icon" />
-      </div>
-    </div>
+			<Flex
+				color='black'
+				bg='#F4F4F4'
+				mw={1}
+				paddingX={10}
+				height={'60px'}
+				flexDirection='row'
+				alignItems='center'>
+				<h4>{title}</h4>
+				<Box mx='auto' />
+			</Flex>
+			<Switch>
+				<Route path='/property-listings'>
+					<PropertyListings />
+				</Route>
+			</Switch>
+    </Box>
   );
 }
 
